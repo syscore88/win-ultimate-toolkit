@@ -1247,8 +1247,10 @@ fn is_opengl_pack_installed() -> bool {
 fn run_first_time_setup() {
     let need_winget = !is_winget_available();
     let need_opengl = !is_opengl_pack_installed();
+    let need_scoop = !is_scoop_available();
+    let need_choco = !is_choco_available();
 
-    if !need_winget && !need_opengl {
+    if !need_winget && !need_opengl && !need_scoop && !need_choco {
         return;
     }
 
@@ -1258,6 +1260,8 @@ fn run_first_time_setup() {
 
     $needWinget = $__NEED_WINGET__
     $needOpenGL = $__NEED_OPENGL__
+    $needScoop = $__NEED_SCOOP__
+    $needChoco = $__NEED_CHOCO__
 
     $sync = [Hashtable]::Synchronized(@{ Status = "Przygotowywanie instalacji...`nPreparing installation..."; Done = $false })
 
@@ -1299,6 +1303,8 @@ fn run_first_time_setup() {
     $rs.SessionStateProxy.SetVariable("sync", $sync)
     $rs.SessionStateProxy.SetVariable("needWinget", $needWinget)
     $rs.SessionStateProxy.SetVariable("needOpenGL", $needOpenGL)
+    $rs.SessionStateProxy.SetVariable("needScoop", $needScoop)
+    $rs.SessionStateProxy.SetVariable("needChoco", $needChoco)
 
     $psInst = [PowerShell]::Create()
     $psInst.Runspace = $rs
@@ -1324,6 +1330,27 @@ fn run_first_time_setup() {
             if ($needOpenGL) {
                 $sync.Status = "Trwa przygotowywanie pakietów...`nPreparing packages..."
                 Start-Process winget -ArgumentList "install --id 9NQPSL29BFFF --exact --source msstore --silent --accept-package-agreements --accept-source-agreements" -WindowStyle Hidden -Wait
+            }
+
+            if ($needScoop) {
+                $sync.Status = "Trwa instalacja menedżera pakietów Scoop...`nInstalling the Scoop package manager..."
+                try {
+                    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force -ErrorAction SilentlyContinue
+                    Invoke-Expression "& {$(Invoke-RestMethod -Uri 'https://get.scoop.sh')} -RunAsAdmin"
+                    $scoopCmd = "$env:USERPROFILE\scoop\shims\scoop.cmd"
+                    if (Test-Path $scoopCmd) {
+                        Start-Process -FilePath $scoopCmd -ArgumentList "bucket add extras" -WindowStyle Hidden -Wait -ErrorAction SilentlyContinue
+                    }
+                } catch {}
+            }
+
+            if ($needChoco) {
+                $sync.Status = "Trwa instalacja menedżera pakietów Chocolatey...`nInstalling the Chocolatey package manager..."
+                try {
+                    Set-ExecutionPolicy Bypass -Scope Process -Force -ErrorAction SilentlyContinue
+                    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+                    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+                } catch {}
             }
         } finally {
             $sync.Done = $true
@@ -1351,7 +1378,9 @@ fn run_first_time_setup() {
 
     let ps_script = ps_template
         .replace("__NEED_WINGET__", if need_winget { "true" } else { "false" })
-        .replace("__NEED_OPENGL__", if need_opengl { "true" } else { "false" });
+        .replace("__NEED_OPENGL__", if need_opengl { "true" } else { "false" })
+        .replace("__NEED_SCOOP__", if need_scoop { "true" } else { "false" })
+        .replace("__NEED_CHOCO__", if need_choco { "true" } else { "false" });
 
     let _ = Command::new("powershell")
     .creation_flags(CREATE_NO_WINDOW)
@@ -1400,6 +1429,392 @@ fn is_winget_available() -> bool {
     .creation_flags(CREATE_NO_WINDOW)
     .status()
     .map_or(false, |s| s.success())
+}
+
+fn scoop_shims_path() -> Option<PathBuf> {
+    if let Ok(scoop_env) = std::env::var("SCOOP") {
+        let path = PathBuf::from(scoop_env).join("shims").join("scoop.cmd");
+        if path.exists() {
+            return Some(path);
+        }
+    }
+    if let Ok(user_profile) = std::env::var("USERPROFILE") {
+        let path = PathBuf::from(user_profile).join("scoop").join("shims").join("scoop.cmd");
+        if path.exists() {
+            return Some(path);
+        }
+    }
+    None
+}
+
+fn is_scoop_available() -> bool {
+    if scoop_shims_path().is_some() {
+        return true;
+    }
+
+    Command::new("scoop")
+    .arg("--version")
+    .creation_flags(CREATE_NO_WINDOW)
+    .status()
+    .map_or(false, |s| s.success())
+}
+
+fn scoop_command() -> Command {
+    match scoop_shims_path() {
+        Some(path) => Command::new(path),
+        None => Command::new("scoop"),
+    }
+}
+
+fn choco_exe_path() -> PathBuf {
+    let program_data = std::env::var("ProgramData").unwrap_or_else(|_| "C:\\ProgramData".to_string());
+    PathBuf::from(program_data).join("chocolatey").join("bin").join("choco.exe")
+}
+
+fn is_choco_available() -> bool {
+    if choco_exe_path().exists() {
+        return true;
+    }
+
+    Command::new("choco")
+    .arg("--version")
+    .creation_flags(CREATE_NO_WINDOW)
+    .status()
+    .map_or(false, |s| s.success())
+}
+
+fn choco_command() -> Command {
+    let path = choco_exe_path();
+    if path.exists() {
+        Command::new(path)
+    } else {
+        Command::new("choco")
+    }
+}
+
+/// Zamienia dowolny tekst na prosty identyfikator złożony z małych liter, cyfr i myślników,
+/// nadający się do użycia jako nazwa pakietu Scoop/Chocolatey (np. "4K Video Downloader" -> "4k-video-downloader").
+fn slugify(input: &str) -> String {
+    let mut out = String::new();
+    let mut last_was_sep = true;
+
+    for ch in input.chars() {
+        if ch.is_ascii_alphanumeric() {
+            out.push(ch.to_ascii_lowercase());
+            last_was_sep = false;
+        } else if !last_was_sep {
+            out.push('-');
+            last_was_sep = true;
+        }
+    }
+
+    out.trim_matches('-').to_string()
+}
+
+/// Buduje listę prawdopodobnych nazw pakietu dla Scoop/Chocolatey na podstawie identyfikatora
+/// Winget (część po ostatniej kropce, np. "Brave.Brave" -> "brave") oraz wyświetlanej nazwy programu.
+fn candidate_package_names(winget_id: &str, pkg_name: &str) -> Vec<String> {
+    let mut candidates = Vec::new();
+
+    if let Some(part) = winget_id.rsplit('.').next() {
+        let slug = slugify(part);
+        if !slug.is_empty() {
+            candidates.push(slug);
+        }
+    }
+
+    let name_slug = slugify(pkg_name);
+    if !name_slug.is_empty() && !candidates.contains(&name_slug) {
+        candidates.push(name_slug);
+    }
+
+    candidates
+}
+
+/// Próbuje zainstalować program przy pomocy menedżera Scoop, testując kolejne prawdopodobne
+/// nazwy pakietu. Zwraca true przy pierwszej udanej instalacji.
+fn try_scoop_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
+    let update_status = |msg: &str| {
+        *status.lock().unwrap() = msg.to_string();
+        ctx.request_repaint();
+    };
+
+    for candidate in candidates {
+        update_status(&if lang_is_pl {
+            format!("Instalowanie (Scoop): {}", pkg_name)
+        } else {
+            format!("Installing (Scoop): {}", pkg_name)
+        });
+
+        let success = scoop_command()
+        .creation_flags(CREATE_NO_WINDOW)
+        .args(["install", candidate.as_str()])
+        .status()
+        .map_or(false, |s| s.success());
+
+        if success {
+            return true;
+        }
+    }
+
+    false
+}
+
+/// Próbuje zainstalować program przy pomocy menedżera Chocolatey, testując kolejne prawdopodobne
+/// nazwy pakietu. Zwraca true przy pierwszej udanej instalacji.
+fn try_choco_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
+    let update_status = |msg: &str| {
+        *status.lock().unwrap() = msg.to_string();
+        ctx.request_repaint();
+    };
+
+    for candidate in candidates {
+        update_status(&if lang_is_pl {
+            format!("Instalowanie (Chocolatey): {}", pkg_name)
+        } else {
+            format!("Installing (Chocolatey): {}", pkg_name)
+        });
+
+        let success = choco_command()
+        .creation_flags(CREATE_NO_WINDOW)
+        .args(["install", candidate.as_str(), "-y", "--no-progress", "--accept-license"])
+        .status()
+        .map_or(false, |s| s.success());
+
+        if success {
+            return true;
+        }
+    }
+
+    false
+}
+
+/// Ręcznie zweryfikowane (na podstawie rzeczywistych manifestów/pakietów) nazwy pakietów Scoop
+/// dla programów, których automatyczne odgadnięcie nazwy (slug) mogłoby się nie udać albo trafić
+/// w zupełnie inny pakiet. Zwraca None, gdy dany program nie ma odpowiednika w Scoop.
+fn known_scoop_id(winget_id: &str) -> Option<&'static str> {
+    match winget_id {
+        "AnyDeskSoftwareGmbH.AnyDesk" => Some("anydesk"),
+        "Audacity.Audacity" => Some("audacity"),
+        "BleachBit.BleachBit" => Some("bleachbit"),
+        "BlenderFoundation.Blender" => Some("blender"),
+        "Brave.Brave" => Some("brave"),
+        "Anysphere.Cursor" => Some("cursor"),
+        "DeepL.DeepL" => Some("deepl"),
+        "Discord.Discord" => Some("discord"),
+        "Docker.DockerDesktop" => Some("docker-desktop"),
+        "DOSBox.DOSBox" => Some("dosbox"),
+        "Doublecmd.Doublecmd" => Some("doublecmd"),
+        "Dropbox.Dropbox" => Some("dropbox"),
+        "TimKosse.FileZilla.Client" => Some("filezilla"),
+        "Mozilla.Firefox" => Some("firefox"),
+        "FreeCAD.FreeCAD" => Some("freecad"),
+        "GIMP.GIMP.3" => Some("gimp"),
+        "Git.Git" => Some("git"),
+        "Google.Chrome" => Some("googlechrome"),
+        "Google.PlatformTools" => Some("adb"),
+        "HandBrake.HandBrake" => Some("handbrake"),
+        "CPUID.HWMonitor" => Some("hwmonitor"),
+        "Inkscape.Inkscape" => Some("inkscape"),
+        "IrfanSkiljan.IrfanView" => Some("irfanview"),
+        "KDE.Kdenlive" => Some("kdenlive"),
+        "DominikReichl.KeePass" => Some("keepass"),
+        "KiCad.KiCad" => Some("kicad"),
+        "KDE.Krita" => Some("krita"),
+        "TheDocumentFoundation.LibreOffice" => Some("libreoffice"),
+        "LMMS.LMMS" => Some("lmms"),
+        "LMStudio.LMStudio" => Some("lm-studio"),
+        "Mega.MEGASync" => Some("megasync"),
+        "Microsoft.PowerToys" => Some("powertoys"),
+        "Mixxx.Mixxx" => Some("mixxx"),
+        "StevenMayall.MusicBee" => Some("musicbee"),
+        "Nextcloud.NextcloudDesktop" => Some("nextcloud-client"),
+        "Notepad++.Notepad++" => Some("notepadplusplus"),
+        "OBSProject.OBSStudio" => Some("obs-studio"),
+        "Ollama.Ollama" => Some("ollama"),
+        "ONLYOFFICE.DesktopEditors" => Some("onlyoffice"),
+        "Opera.Opera" => Some("opera"),
+        "Opera.OperaGX" => Some("opera-gx"),
+        "dotPDN.PaintDotNet" => Some("paint.net"),
+        "RedHat.Podman-Desktop" => Some("podman-desktop"),
+        "Daum.PotPlayer" => Some("potplayer"),
+        "ProtonTechnologies.ProtonVPN" => Some("protonvpn"),
+        "qBittorrent.qBittorrent" => Some("qbittorrent"),
+        "RawTherapee.RawTherapee" => Some("rawtherapee"),
+        "Cockos.REAPER" => Some("reaper"),
+        "Rufus.Rufus" => Some("rufus"),
+        "RustDesk.RustDesk" => Some("rustdesk"),
+        "Meltytech.Shotcut" => Some("shotcut"),
+        "OpenWhisperSystems.Signal" => Some("signal"),
+        "Spotify.Spotify" => Some("spotify"),
+        "Valve.Steam" => Some("steam"),
+        "SumatraPDF.SumatraPDF" => Some("sumatrapdf"),
+        "Telegram.TelegramDesktop" => Some("telegram"),
+        "Mozilla.Thunderbird" => Some("thunderbird"),
+        "Transmission.Transmission" => Some("transmission"),
+        "ventoy.Ventoy" => Some("ventoy"),
+        "Oracle.VirtualBox" => Some("virtualbox"),
+        "VideoLAN.VLC" => Some("vlc"),
+        "VivaldiTechnologies.Vivaldi" => Some("vivaldi"),
+        "VSCodium.VSCodium" => Some("vscodium"),
+        "RamenSoftware.Windhawk" => Some("windhawk"),
+        "WireGuard.WireGuard" => Some("wireguard"),
+        "XnSoft.XnViewMP" => Some("xnviewmp"),
+        "ZenBrowser.Zen" => Some("zen-browser"),
+        "Zoom.Zoom" => Some("zoom"),
+        "Klocman.BulkCrapUninstaller" => Some("bulk-crap-uninstaller"),
+        "darktable.darktable" => Some("darktable"),
+        "Fastfetch-cli.Fastfetch" => Some("fastfetch"),
+        "FreeTubeApp.FreeTube" => Some("freetube"),
+        "GSmartControl.GSmartControl" => Some("gsmartcontrol"),
+        "nomacs.nomacs" => Some("nomacs"),
+        "CalcProgrammer1.OpenRGB" => Some("openrgb"),
+        "Pidgin.Pidgin" => Some("pidgin"),
+        "PuTTY.PuTTY" => Some("putty"),
+        "Rainmeter.Rainmeter" => Some("rainmeter"),
+        "Genymobile.scrcpy" => Some("scrcpy"),
+        "ShareX.ShareX" => Some("sharex"),
+        "KRTirtho.Spotube" => Some("spotube"),
+        _ => None,
+    }
+}
+
+/// Ręcznie zweryfikowane (sprawdzone bezpośrednio w Chocolatey Community Repository) identyfikatory
+/// pakietów Chocolatey. Nazwy w Chocolatey często różnią się od ID Wingetu lub nazwy wyświetlanej
+/// (np. "ONLYOFFICE.DesktopEditors" to w Chocolatey po prostu "onlyoffice", a nie zgadywane
+/// "onlyoffice-desktopeditors"), dlatego dla najważniejszych/najbardziej niejednoznacznych pozycji
+/// nazwy zostały potwierdzone ręcznie zamiast polegać wyłącznie na automatycznym odgadywaniu.
+fn known_choco_id(winget_id: &str) -> Option<&'static str> {
+    match winget_id {
+        "NoWinget.ActivePresenter" => Some("activepresenter"),
+        "FinalWire.AIDA64.Extreme" => Some("aida64-extreme"),
+        "AnyDeskSoftwareGmbH.AnyDesk" => Some("anydesk"),
+        "Audacity.Audacity" => Some("audacity"),
+        "BleachBit.BleachBit" => Some("bleachbit"),
+        "BlenderFoundation.Blender" => Some("blender"),
+        "Brave.Brave" => Some("brave"),
+        "TechSmith.Camtasia" => Some("camtasia"),
+        "Clonezilla.Clonezilla" => Some("clonezilla"),
+        "Anysphere.Cursor" => Some("cursor"),
+        "DeepL.DeepL" => Some("deepl"),
+        "Microsoft.DirectX" => Some("directx"),
+        "Discord.Discord" => Some("discord"),
+        "Docker.DockerDesktop" => Some("docker-desktop"),
+        "DOSBox.DOSBox" => Some("dosbox"),
+        "Doublecmd.Doublecmd" => Some("doublecmd"),
+        "Dropbox.Dropbox" => Some("dropbox"),
+        "TimKosse.FileZilla.Client" => Some("filezilla"),
+        "Mozilla.Firefox" => Some("firefox"),
+        "NoWinget.FormatFactory" => Some("formatfactory"),
+        "FreeCAD.FreeCAD" => Some("freecad"),
+        "FreeDownloadManager.FreeDownloadManager" => Some("freedownloadmanager"),
+        "GIMP.GIMP.3" => Some("gimp"),
+        "Git.Git" => Some("git"),
+        "Google.Chrome" => Some("googlechrome"),
+        "Google.PlatformTools" => Some("adb"),
+        "HandBrake.HandBrake" => Some("handbrake"),
+        "CPUID.HWMonitor" => Some("hwmonitor"),
+        "Inkscape.Inkscape" => Some("inkscape"),
+        "IrfanSkiljan.IrfanView" => Some("irfanview"),
+        "AppWork.JDownloader" => Some("jdownloader"),
+        "KDE.Kdenlive" => Some("kdenlive"),
+        "DominikReichl.KeePass" => Some("keepass"),
+        "KiCad.KiCad" => Some("kicad"),
+        "KDE.Krita" => Some("krita"),
+        "TheDocumentFoundation.LibreOffice" => Some("libreoffice-fresh"),
+        "LMMS.LMMS" => Some("lmms"),
+        "Mega.MEGASync" => Some("megasync"),
+        "Microsoft.PowerToys" => Some("powertoys"),
+        "Microsoft.VisualStudio.2022.Community" => Some("visualstudio2022community"),
+        "Mixxx.Mixxx" => Some("mixxx"),
+        "StevenMayall.MusicBee" => Some("musicbee"),
+        "Nextcloud.NextcloudDesktop" => Some("nextcloud-client"),
+        "Notepad++.Notepad++" => Some("notepadplusplus.install"),
+        "OBSProject.OBSStudio" => Some("obs-studio"),
+        "Ollama.Ollama" => Some("ollama"),
+        "ONLYOFFICE.DesktopEditors" => Some("onlyoffice"),
+        "Opera.Opera" => Some("opera"),
+        "Opera.OperaGX" => Some("opera-gx"),
+        "dotPDN.PaintDotNet" => Some("paint.net"),
+        "RedHat.Podman-Desktop" => Some("podman-desktop"),
+        "Daum.PotPlayer" => Some("potplayer"),
+        "ProtonTechnologies.ProtonVPN" => Some("protonvpn"),
+        "qBittorrent.qBittorrent" => Some("qbittorrent"),
+        "RawTherapee.RawTherapee" => Some("rawtherapee"),
+        "Cockos.REAPER" => Some("reaper"),
+        "VSRevoGroup.RevoUninstaller" => Some("revo-uninstaller"),
+        "Rufus.Rufus" => Some("rufus"),
+        "RustDesk.RustDesk" => Some("rustdesk.install"),
+        "Meltytech.Shotcut" => Some("shotcut"),
+        "OpenWhisperSystems.Signal" => Some("signal"),
+        "Spotify.Spotify" => Some("spotify"),
+        "Valve.Steam" => Some("steam"),
+        "SumatraPDF.SumatraPDF" => Some("sumatrapdf"),
+        "Telegram.TelegramDesktop" => Some("telegram"),
+        "Mozilla.Thunderbird" => Some("thunderbird"),
+        "Transmission.Transmission" => Some("transmission"),
+        "ventoy.Ventoy" => Some("ventoy"),
+        "Oracle.VirtualBox" => Some("virtualbox"),
+        "VideoLAN.VLC" => Some("vlc"),
+        "VivaldiTechnologies.Vivaldi" => Some("vivaldi"),
+        "VSCodium.VSCodium" => Some("vscodium"),
+        "WireGuard.WireGuard" => Some("wireguard"),
+        "XnSoft.XnViewMP" => Some("xnviewmp"),
+        "Zoom.Zoom" => Some("zoom"),
+        "NoWinget.4KVideoDownloader" => Some("4k-video-downloader"),
+        "Klocman.BulkCrapUninstaller" => Some("bulk-crap-uninstaller"),
+        "TGRMNSoftware.BulkRenameUtility" => Some("bulkrenameutility"),
+        "darktable.darktable" => Some("darktable"),
+        "Fastfetch-cli.Fastfetch" => Some("fastfetch"),
+        "FreeTubeApp.FreeTube" => Some("freetube"),
+        "GSmartControl.GSmartControl" => Some("gsmartcontrol"),
+        "NoWinget.JavaOpenJDK" => Some("temurin"),
+        "NoWinget.LockHunter" => Some("lockhunter"),
+        "nomacs.nomacs" => Some("nomacs"),
+        "CalcProgrammer1.OpenRGB" => Some("openrgb"),
+        "Pidgin.Pidgin" => Some("pidgin"),
+        "PuTTY.PuTTY" => Some("putty"),
+        "Rainmeter.Rainmeter" => Some("rainmeter"),
+        "Genymobile.scrcpy" => Some("scrcpy"),
+        "ShareX.ShareX" => Some("sharex"),
+        _ => None,
+    }
+}
+
+/// Buduje pełną, uporządkowaną listę kandydatów dla Scoop: najpierw ręcznie zweryfikowana nazwa
+/// (jeśli jest znana), potem automatycznie odgadnięte nazwy zapasowe.
+fn scoop_candidates(winget_id: &str, pkg_name: &str) -> Vec<String> {
+    let mut candidates = Vec::new();
+
+    if let Some(known) = known_scoop_id(winget_id) {
+        candidates.push(known.to_string());
+    }
+
+    for guess in candidate_package_names(winget_id, pkg_name) {
+        if !candidates.contains(&guess) {
+            candidates.push(guess);
+        }
+    }
+
+    candidates
+}
+
+/// Buduje pełną, uporządkowaną listę kandydatów dla Chocolatey: najpierw ręcznie zweryfikowana
+/// nazwa (jeśli jest znana), potem automatycznie odgadnięte nazwy zapasowe.
+fn choco_candidates(winget_id: &str, pkg_name: &str) -> Vec<String> {
+    let mut candidates = Vec::new();
+
+    if let Some(known) = known_choco_id(winget_id) {
+        candidates.push(known.to_string());
+    }
+
+    for guess in candidate_package_names(winget_id, pkg_name) {
+        if !candidates.contains(&guess) {
+            candidates.push(guess);
+        }
+    }
+
+    candidates
 }
 
 fn is_package_installed(pkg_id: &str) -> bool {
@@ -1465,6 +1880,17 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
     .map_or(false, |s| s.success());
 
     if success_winget {
+        return true;
+    }
+
+    let scoop_cands = scoop_candidates(winget_id, pkg_name);
+    let choco_cands = choco_candidates(winget_id, pkg_name);
+
+    if is_scoop_available() && try_scoop_install(&scoop_cands, pkg_name, lang_is_pl, status, ctx) {
+        return true;
+    }
+
+    if is_choco_available() && try_choco_install(&choco_cands, pkg_name, lang_is_pl, status, ctx) {
         return true;
     }
 
