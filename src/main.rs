@@ -126,7 +126,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Perplexity.Perplexity" => "Aplikacja wyszukiwarki i asystenta AI Perplexity.",
         "Picsart.Picsart" => "Edytor zdjęć i grafiki z funkcjami AI.",
         "Pinterest.Pinterest" => "Aplikacja społecznościowa do odkrywania inspiracji wizualnych.",
-        "NoWinget.PITFormat" => "Narzędzie do formatowania partycji.",
         "RedHat.Podman-Desktop" => "Graficzny interfejs do zarządzania kontenerami Podman.",
         "Daum.PotPlayer" => "Wszechstronny odtwarzacz multimedialny.",
         "Amazon.PrimeVideo" => "Serwis streamingowy Amazon Prime Video.",
@@ -166,7 +165,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "VideoLAN.VLC" => "Uniwersalny odtwarzacz multimedialny obsługujący niemal każdy format.",
         "VivaldiTechnologies.Vivaldi" => "Przeglądarka internetowa Vivaldi z rozbudowanymi opcjami personalizacji.",
         "VSCodium.VSCodium" => "Edytor kodu źródłowego, wolna od telemetrii wersja VS Code.",
-        "NoWinget.WebWave" => "Kreator stron internetowych online bez kodowania.",
         "WhatsApp.WhatsApp" => "Komunikator do wiadomości i rozmów WhatsApp.",
         "RamenSoftware.Windhawk" => "Modyfikuje wygląd i zachowanie Windows za pomocą wtyczek.",
         "WireGuard.WireGuard" => "Prosty, szybki i nowoczesny VPN oparty na nowoczesnej kryptografii.",
@@ -176,7 +174,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "ZenBrowser.Zen" => "Przeglądarka internetowa skupiona na estetyce i produktywności.",
         "Zoom.Zoom" => "Program do wideokonferencji i spotkań online.",
         "NoWinget.4KVideoDownloader" => "Pobiera filmy, playlisty i napisy z YouTube oraz innych serwisów w wysokiej jakości.",
-        "NoWinget.ADBKit" => "Zestaw narzędzi ADB, Fastboot i recovery do pracy z urządzeniami Android.",
         "Klocman.BulkCrapUninstaller" => "Zaawansowane narzędzie do masowego odinstalowywania programów wraz z pozostałościami.",
         "TGRMNSoftware.BulkRenameUtility" => "Narzędzie do masowej zmiany nazw wielu plików jednocześnie.",
         "darktable.darktable" => "Darmowy program do obróbki zdjęć RAW i zarządzania fotografiami.",
@@ -184,7 +181,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Fastfetch-cli.Fastfetch" => "Szybkie narzędzie wiersza poleceń wyświetlające informacje o systemie i sprzęcie.",
         "FreeTubeApp.FreeTube" => "Prywatna, wolna od reklam aplikacja do oglądania filmów z YouTube.",
         "GSmartControl.GSmartControl" => "Sprawdza stan zdrowia dysków twardych i SSD (SMART).",
-        "NoWinget.HeliumBrowser" => "Lekka, szybka przeglądarka internetowa oparta na Chromium, skupiona na prywatności.",
+        "ImputNet.Helium" => "Lekka, szybka przeglądarka internetowa oparta na Chromium, skupiona na prywatności.",
         "NoWinget.iTubeGo" => "Pobiera filmy i muzykę z YouTube oraz innych serwisów wideo.",
         "NoWinget.JavaOpenJDK" => "Darmowe środowisko uruchomieniowe i zestaw narzędzi do programowania w Javie (OpenJDK).",
         "NoWinget.LockHunter" => "Odblokowuje i usuwa pliki zablokowane przez inne procesy w systemie.",
@@ -303,7 +300,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Perplexity.Perplexity" => "AI-powered search and assistant app.",
         "Picsart.Picsart" => "Photo and graphic editor with AI features.",
         "Pinterest.Pinterest" => "Social app for discovering visual inspiration.",
-        "NoWinget.PITFormat" => "Partition formatting utility.",
         "RedHat.Podman-Desktop" => "Graphical UI for managing Podman containers.",
         "Daum.PotPlayer" => "Feature-rich multimedia player.",
         "Amazon.PrimeVideo" => "Amazon Prime Video streaming app.",
@@ -343,7 +339,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "VideoLAN.VLC" => "Universal media player supporting nearly every format.",
         "VivaldiTechnologies.Vivaldi" => "Vivaldi web browser with extensive customization options.",
         "VSCodium.VSCodium" => "Telemetry-free build of VS Code source code editor.",
-        "NoWinget.WebWave" => "Online no-code website builder.",
         "WhatsApp.WhatsApp" => "WhatsApp messaging and calling app.",
         "RamenSoftware.Windhawk" => "Customizes Windows appearance and behavior via mods.",
         "WireGuard.WireGuard" => "Simple, fast, and modern VPN using state-of-the-art cryptography.",
@@ -353,7 +348,6 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "ZenBrowser.Zen" => "Web browser focused on aesthetics and productivity.",
         "Zoom.Zoom" => "Video conferencing and online meeting software.",
         "NoWinget.4KVideoDownloader" => "Downloads videos, playlists, and subtitles from YouTube and other sites in high quality.",
-        "NoWinget.ADBKit" => "ADB, Fastboot, and recovery toolkit for working with Android devices.",
         "Klocman.BulkCrapUninstaller" => "Advanced tool for bulk-uninstalling programs along with their leftovers.",
         "TGRMNSoftware.BulkRenameUtility" => "Tool for renaming large batches of files at once.",
         "darktable.darktable" => "Free RAW photo editor and photography workflow application.",
@@ -361,7 +355,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Fastfetch-cli.Fastfetch" => "Fast command-line tool that displays system and hardware information.",
         "FreeTubeApp.FreeTube" => "Private, ad-free app for watching YouTube videos.",
         "GSmartControl.GSmartControl" => "Checks the health (SMART) status of hard drives and SSDs.",
-        "NoWinget.HeliumBrowser" => "Lightweight, fast Chromium-based web browser focused on privacy.",
+        "ImputNet.Helium" => "Lightweight, fast Chromium-based web browser focused on privacy.",
         "NoWinget.iTubeGo" => "Downloads videos and music from YouTube and other video sites.",
         "NoWinget.JavaOpenJDK" => "Free Java runtime and development kit (OpenJDK).",
         "NoWinget.LockHunter" => "Unlocks and deletes files that are locked by other processes.",
@@ -538,7 +532,6 @@ impl Default for WinUltimateToolkit {
                 ("Perplexity.Perplexity", "Perplexity", false),
                 ("Picsart.Picsart", "Picsart", false),
                 ("Pinterest.Pinterest", "Pinterest", false),
-                ("NoWinget.PITFormat", "PIT Format", false),
                 ("RedHat.Podman-Desktop", "Podman Desktop", false),
                 ("Daum.PotPlayer", "PotPlayer", false),
                 ("Amazon.PrimeVideo", "Prime Video", false),
@@ -578,7 +571,6 @@ impl Default for WinUltimateToolkit {
                 ("VideoLAN.VLC", "VLC", false),
                 ("VivaldiTechnologies.Vivaldi", "Vivaldi", false),
                 ("VSCodium.VSCodium", "VSCodium", false),
-                ("NoWinget.WebWave", "WebWave", false),
                 ("WhatsApp.WhatsApp", "WhatsApp", false),
                 ("RamenSoftware.Windhawk", "Windhawk", false),
                 ("WireGuard.WireGuard", "WireGuard", false),
@@ -588,7 +580,6 @@ impl Default for WinUltimateToolkit {
                 ("ZenBrowser.Zen", "Zen Browser", false),
                 ("Zoom.Zoom", "Zoom Workplace", false),
                 ("NoWinget.4KVideoDownloader", "4K Video Downloader", false),
-                ("NoWinget.ADBKit", "ADBKit", false),
                 ("Klocman.BulkCrapUninstaller", "Bulk Crap Uninstaller", false),
                 ("TGRMNSoftware.BulkRenameUtility", "Bulk Rename Utility", false),
                 ("darktable.darktable", "darktable", false),
@@ -596,7 +587,7 @@ impl Default for WinUltimateToolkit {
                 ("Fastfetch-cli.Fastfetch", "Fastfetch", false),
                 ("FreeTubeApp.FreeTube", "FreeTube", false),
                 ("GSmartControl.GSmartControl", "GSmartControl", false),
-                ("NoWinget.HeliumBrowser", "Helium Browser", false),
+                ("ImputNet.Helium", "Helium Browser", false),
                 ("NoWinget.iTubeGo", "iTubeGo", false),
                 ("NoWinget.JavaOpenJDK", "Java OpenJDK", false),
                 ("NoWinget.LockHunter", "LockHunter", false),
@@ -1240,10 +1231,6 @@ fn is_opengl_pack_installed() -> bool {
     }
 }
 
-/// Shows a single, non-interactive setup window (no OK button) that stays on screen
-/// while Winget (if missing) and the required OpenGL/OpenCL package are installed in the
-/// background, updating its own status text as it progresses, and closing itself
-/// automatically once everything is done. Does nothing if neither step is needed.
 fn run_first_time_setup() {
     let need_winget = !is_winget_available();
     let need_opengl = !is_opengl_pack_installed();
@@ -1492,8 +1479,6 @@ fn choco_command() -> Command {
     }
 }
 
-/// Zamienia dowolny tekst na prosty identyfikator złożony z małych liter, cyfr i myślników,
-/// nadający się do użycia jako nazwa pakietu Scoop/Chocolatey (np. "4K Video Downloader" -> "4k-video-downloader").
 fn slugify(input: &str) -> String {
     let mut out = String::new();
     let mut last_was_sep = true;
@@ -1511,8 +1496,6 @@ fn slugify(input: &str) -> String {
     out.trim_matches('-').to_string()
 }
 
-/// Buduje listę prawdopodobnych nazw pakietu dla Scoop/Chocolatey na podstawie identyfikatora
-/// Winget (część po ostatniej kropce, np. "Brave.Brave" -> "brave") oraz wyświetlanej nazwy programu.
 fn candidate_package_names(winget_id: &str, pkg_name: &str) -> Vec<String> {
     let mut candidates = Vec::new();
 
@@ -1531,8 +1514,6 @@ fn candidate_package_names(winget_id: &str, pkg_name: &str) -> Vec<String> {
     candidates
 }
 
-/// Próbuje zainstalować program przy pomocy menedżera Scoop, testując kolejne prawdopodobne
-/// nazwy pakietu. Zwraca true przy pierwszej udanej instalacji.
 fn try_scoop_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
     let update_status = |msg: &str| {
         *status.lock().unwrap() = msg.to_string();
@@ -1560,8 +1541,6 @@ fn try_scoop_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, st
     false
 }
 
-/// Próbuje zainstalować program przy pomocy menedżera Chocolatey, testując kolejne prawdopodobne
-/// nazwy pakietu. Zwraca true przy pierwszej udanej instalacji.
 fn try_choco_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
     let update_status = |msg: &str| {
         *status.lock().unwrap() = msg.to_string();
@@ -1589,9 +1568,6 @@ fn try_choco_install(candidates: &[String], pkg_name: &str, lang_is_pl: bool, st
     false
 }
 
-/// Ręcznie zweryfikowane (na podstawie rzeczywistych manifestów/pakietów) nazwy pakietów Scoop
-/// dla programów, których automatyczne odgadnięcie nazwy (slug) mogłoby się nie udać albo trafić
-/// w zupełnie inny pakiet. Zwraca None, gdy dany program nie ma odpowiednika w Scoop.
 fn known_scoop_id(winget_id: &str) -> Option<&'static str> {
     match winget_id {
         "AnyDeskSoftwareGmbH.AnyDesk" => Some("anydesk"),
@@ -1679,15 +1655,17 @@ fn known_scoop_id(winget_id: &str) -> Option<&'static str> {
     }
 }
 
-/// Ręcznie zweryfikowane (sprawdzone bezpośrednio w Chocolatey Community Repository) identyfikatory
-/// pakietów Chocolatey. Nazwy w Chocolatey często różnią się od ID Wingetu lub nazwy wyświetlanej
-/// (np. "ONLYOFFICE.DesktopEditors" to w Chocolatey po prostu "onlyoffice", a nie zgadywane
-/// "onlyoffice-desktopeditors"), dlatego dla najważniejszych/najbardziej niejednoznacznych pozycji
-/// nazwy zostały potwierdzone ręcznie zamiast polegać wyłącznie na automatycznym odgadywaniu.
 fn known_choco_id(winget_id: &str) -> Option<&'static str> {
     match winget_id {
         "NoWinget.ActivePresenter" => Some("activepresenter"),
         "FinalWire.AIDA64.Extreme" => Some("aida64-extreme"),
+        "NoWinget.FileConverter" => Some("file-converter"),
+        "NoWinget.freac" => Some("freac"),
+        "NoWinget.SnappyDriverInstaller" => Some("sdio"),
+        "NoWinget.Tenacity" => Some("tenacity"),
+        "NoWinget.Wix" => Some("wixtoolset"),
+        "NoWinget.SmartRename" => Some("smartrename"),
+        "NoWinget.ytDownloader" => Some("ytdownloader"),
         "AnyDeskSoftwareGmbH.AnyDesk" => Some("anydesk"),
         "Audacity.Audacity" => Some("audacity"),
         "BleachBit.BleachBit" => Some("bleachbit"),
@@ -1781,8 +1759,6 @@ fn known_choco_id(winget_id: &str) -> Option<&'static str> {
     }
 }
 
-/// Buduje pełną, uporządkowaną listę kandydatów dla Scoop: najpierw ręcznie zweryfikowana nazwa
-/// (jeśli jest znana), potem automatycznie odgadnięte nazwy zapasowe.
 fn scoop_candidates(winget_id: &str, pkg_name: &str) -> Vec<String> {
     let mut candidates = Vec::new();
 
@@ -1799,8 +1775,6 @@ fn scoop_candidates(winget_id: &str, pkg_name: &str) -> Vec<String> {
     candidates
 }
 
-/// Buduje pełną, uporządkowaną listę kandydatów dla Chocolatey: najpierw ręcznie zweryfikowana
-/// nazwa (jeśli jest znana), potem automatycznie odgadnięte nazwy zapasowe.
 fn choco_candidates(winget_id: &str, pkg_name: &str) -> Vec<String> {
     let mut candidates = Vec::new();
 
@@ -1832,6 +1806,110 @@ fn is_package_installed(pkg_id: &str) -> bool {
     } else {
         false
     }
+}
+
+fn known_direct_exe_url(winget_id: &str) -> Option<&'static str> {
+    match winget_id {
+        "NoWinget.AnimatedWallpaperMaker" => Some("http://download.desktoppaints.com/wp_maker.exe"),
+        "NoWinget.Automize" => Some("https://www.hiteksoftware.com/mize/install/14x/windows/mize.exe"),
+        "NoWinget.Doxillion" => Some("https://www.nchsoftware.com/documentconvert/doxillionsetup.exe"),
+        "NoWinget.EaseUSVideoDownloader" => Some("https://down.easeus.com/product/video_downloader"),
+        "NoWinget.iTubeGo" => Some("https://itubego.com/download/?product=itubego.exe"),
+        "NoWinget.StrongRecovery" => Some("https://www.strongrecovery.com/xdownload.php?xfile=StrongRecovery.exe"),
+        _ => None,
+    }
+}
+
+fn known_msstore_id(winget_id: &str) -> Option<&'static str> {
+    match winget_id {
+        "NoWinget.Sefirah" => Some("9PJV6D1JPG0H"),
+        _ => None,
+    }
+}
+
+fn try_msstore_install(store_id: &str, pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
+    let update_status = |msg: &str| {
+        *status.lock().unwrap() = msg.to_string();
+        ctx.request_repaint();
+    };
+
+    update_status(&if lang_is_pl {
+        format!("Instalowanie (Microsoft Store): {}", pkg_name)
+    } else {
+        format!("Installing (Microsoft Store): {}", pkg_name)
+    });
+
+    Command::new("winget")
+    .creation_flags(CREATE_NO_WINDOW)
+    .args(["install", "--id", store_id, "-e", "--source", "msstore", "--accept-package-agreements", "--accept-source-agreements"])
+    .status()
+    .map_or(false, |s| s.success())
+}
+
+fn download_file(url: &str, dest: &PathBuf) -> bool {
+    let ps_cmd = format!(
+        "$ProgressPreference = 'SilentlyContinue'; try {{ Invoke-WebRequest -Uri '{}' -OutFile '{}' -UseBasicParsing }} catch {{ exit 1 }}",
+        url,
+        dest.display()
+    );
+
+    let success = Command::new("powershell")
+    .creation_flags(CREATE_NO_WINDOW)
+    .args(["-NoProfile", "-Command", &ps_cmd])
+    .status()
+    .map_or(false, |s| s.success());
+
+    success && dest.exists()
+}
+
+fn run_downloaded_installer(path: &PathBuf) -> bool {
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
+
+    if ext == "msi" {
+        Command::new("msiexec")
+        .args(["/i", &path.display().to_string(), "/qn", "/norestart"])
+        .status()
+        .map_or(false, |s| s.success())
+    } else {
+        Command::new(path)
+        .status()
+        .map_or(false, |s| s.success())
+    }
+}
+
+fn try_direct_download_install(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
+    let update_status = |msg: &str| {
+        *status.lock().unwrap() = msg.to_string();
+        ctx.request_repaint();
+    };
+
+    let url = match known_direct_exe_url(winget_id) {
+        Some(u) => u,
+        None => return false,
+    };
+
+    update_status(&if lang_is_pl {
+        format!("Pobieranie instalatora: {}", pkg_name)
+    } else {
+        format!("Downloading installer: {}", pkg_name)
+    });
+
+    let file_name = url.rsplit('/').next().unwrap_or("installer.exe");
+    let dest = std::env::temp_dir().join(file_name);
+
+    if !download_file(url, &dest) {
+        return false;
+    }
+
+    update_status(&if lang_is_pl {
+        format!("Instalowanie: {}", pkg_name)
+    } else {
+        format!("Installing: {}", pkg_name)
+    });
+
+    let success = run_downloaded_installer(&dest);
+    let _ = fs::remove_file(&dest);
+    success
 }
 
 fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &Arc<Mutex<String>>, ctx: &egui::Context) -> bool {
@@ -1883,6 +1961,12 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         return true;
     }
 
+    if let Some(store_id) = known_msstore_id(winget_id) {
+        if try_msstore_install(store_id, pkg_name, lang_is_pl, status, ctx) {
+            return true;
+        }
+    }
+
     let scoop_cands = scoop_candidates(winget_id, pkg_name);
     let choco_cands = choco_candidates(winget_id, pkg_name);
 
@@ -1891,6 +1975,10 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
     }
 
     if is_choco_available() && try_choco_install(&choco_cands, pkg_name, lang_is_pl, status, ctx) {
+        return true;
+    }
+
+    if try_direct_download_install(winget_id, pkg_name, lang_is_pl, status, ctx) {
         return true;
     }
 
@@ -2006,7 +2094,6 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "VideoLAN.VLC" => "https://www.videolan.org/vlc/".to_string(),
         "VivaldiTechnologies.Vivaldi" => "https://vivaldi.com/download/".to_string(),
         "VSCodium.VSCodium" => "https://vscodium.com/".to_string(),
-        "NoWinget.WebWave" => "https://webwavecms.com/".to_string(),
         "WhatsApp.WhatsApp" => "https://www.whatsapp.com/download".to_string(),
         "RamenSoftware.Windhawk" => "https://windhawk.net/".to_string(),
         "WireGuard.WireGuard" => "https://www.wireguard.com/install/".to_string(),
@@ -2038,7 +2125,6 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "MediaHuman.AudioConverter" => "https://www.mediahuman.com/audio-converter/".to_string(),
         "Mega.MEGASync" => "https://mega.io/desktop".to_string(),
         "GNU.MidnightCommander" => "https://midnight-commander.org/".to_string(),
-        "NoWinget.PITFormat" => "https://www.pit-format.pl/".to_string(),
         "RustDesk.RustDesk" => "https://rustdesk.com/".to_string(),
         "NoWinget.StrongRecovery" => "https://www.strongrecovery.com/strongrecovery-free.php".to_string(),
         "Ritlabs.TheBat" => "https://www.ritlabs.com/en/products/thebat/".to_string(),
@@ -2051,7 +2137,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "Fastfetch-cli.Fastfetch" => "https://github.com/fastfetch-cli/fastfetch".to_string(),
         "FreeTubeApp.FreeTube" => "https://freetubeapp.io/".to_string(),
         "GSmartControl.GSmartControl" => "https://gsmartcontrol.shurizzle.dev/".to_string(),
-        "NoWinget.HeliumBrowser" => "https://helium.computer/".to_string(),
+        "ImputNet.Helium" => "https://helium.computer/".to_string(),
         "NoWinget.iTubeGo" => "https://www.itubego.com/youtube-downloader/".to_string(),
         "NoWinget.JavaOpenJDK" => "https://adoptium.net/temurin/releases/".to_string(),
         "NoWinget.LockHunter" => "https://lockhunter.com/download.htm".to_string(),
@@ -2061,7 +2147,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "PuTTY.PuTTY" => "https://www.putty.org/".to_string(),
         "Rainmeter.Rainmeter" => "https://www.rainmeter.net/".to_string(),
         "Genymobile.scrcpy" => "https://github.com/Genymobile/scrcpy".to_string(),
-        "NoWinget.Sefirah" => "https://github.com/shrimqy/Sefirah".to_string(),
+        "NoWinget.Sefirah" => "https://apps.microsoft.com/detail/9pjv6d1jpg0h".to_string(),
         "ShareX.ShareX" => "https://getsharex.com/".to_string(),
         "NoWinget.SnappyDriverInstaller" => "https://sdi-tool.org/".to_string(),
         "KRTirtho.Spotube" => "https://spotube.krtirtho.dev/".to_string(),
