@@ -86,7 +86,7 @@ If you find this tool helpful and it saved you some time, consider buying me a c
 
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://buymeacoffee.com/bartekszczecinski)
 
-<img width="1920" height="1080" alt="Screenshot_win10_2026-08-12_17:04:10" src="https://github.com/user-attachments/assets/382d9dff-04f6-4a17-94af-2ea78e0e482a" />
+<img width="1920" height="1080" alt="Screenshot_win10_2026-09-05_21:36:44" src="https://github.com/user-attachments/assets/a28c4760-f53e-48fb-8ce8-0d2a5161ee25" />
 
 ---
 
