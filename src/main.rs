@@ -121,6 +121,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Nvidia.GeForceNow" => "Usługa chmurowego grania NVIDIA GeForce NOW.",
         "OBSProject.OBSStudio" => "Darmowy program do nagrywania ekranu i streamingu na żywo.",
         "OCBASE.OCCT" => "Narzędzie do testów stabilności i obciążenia podzespołów PC.",
+        "NoWinget.OfficeSuite" => "Pakiet biurowy MobiSystems (dawniej OfficeSuite/obecnie MobiOffice) do edycji dokumentów, arkuszy i prezentacji, kompatybilny z Microsoft Office.",
         "KDE.Okular" => "Przeglądarka dokumentów PDF i innych formatów.",
         "Ollama.Ollama" => "Uruchamianie i zarządzanie lokalnymi modelami AI (LLM) na komputerze.",
         "ONLYOFFICE.DesktopEditors" => "Pakiet biurowy do edycji dokumentów, arkuszy i prezentacji.",
@@ -133,6 +134,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Picsart.Picsart" => "Edytor zdjęć i grafiki z funkcjami AI.",
         "Pinterest.Pinterest" => "Aplikacja społecznościowa do odkrywania inspiracji wizualnych.",
         "RedHat.Podman-Desktop" => "Graficzny interfejs do zarządzania kontenerami Podman.",
+        "NoWinget.PolarisOffice" => "Pakiet biurowy z funkcjami AI do edycji dokumentów, arkuszy i prezentacji, kompatybilny z Microsoft Office.",
         "Daum.PotPlayer" => "Wszechstronny odtwarzacz multimedialny.",
         "Amazon.PrimeVideo" => "Serwis streamingowy Amazon Prime Video.",
         "ProtonTechnologies.ProtonVPN" => "Aplikacja VPN chroniąca prywatność w sieci.",
@@ -152,6 +154,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "OpenWhisperSystems.Signal" => "Szyfrowany komunikator do rozmów i wiadomości.",
         "Smarty.Uninstaller" => "Narzędzie do odinstalowywania programów.",
         "Snap.Snapchat" => "Aplikacja społecznościowa do wysyłania zdjęć i filmów.",
+        "SoftMaker.Office.NX" => "Komercyjny pakiet biurowy (edytor tekstu, arkusze, prezentacje) w pełni kompatybilny z Microsoft Office.",
         "Spotify.Spotify" => "Serwis streamingowy muzyki Spotify.",
         "Valve.Steam" => "Platforma dystrybucji gier komputerowych Steam.",
         "Streamlabs.StreamlabsDesktop" => "Program do streamingu na żywo z nakładkami dla twórców.",
@@ -178,6 +181,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "WireGuard.WireGuard" => "Prosty, szybki i nowoczesny VPN oparty na nowoczesnej kryptografii.",
         "WiseCleaner.WiseCare365" => "Czyszczenie, optymalizacja i przyśpieszanie systemu Windows (Wise Cleaner).",
         "NoWinget.Wix" => "Kreator stron internetowych online Wix.",
+        "Kingsoft.WPSOffice" => "Darmowy pakiet biurowy w pełni kompatybilny z Microsoft Office (edytor tekstu, arkusze, prezentacje, PDF).",
         "XnSoft.XnViewMP" => "Przeglądarka i konwerter obrazów obsługująca wiele formatów.",
         "ZenBrowser.Zen" => "Przeglądarka internetowa skupiona na estetyce i produktywności.",
         "Zoom.Zoom" => "Program do wideokonferencji i spotkań online.",
@@ -308,6 +312,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Nvidia.GeForceNow" => "NVIDIA GeForce NOW cloud gaming service.",
         "OBSProject.OBSStudio" => "Free screen recording and live streaming software.",
         "OCBASE.OCCT" => "PC hardware stress testing and stability tool.",
+        "NoWinget.OfficeSuite" => "MobiSystems office suite (formerly OfficeSuite, now MobiOffice) for editing documents, spreadsheets, and presentations, compatible with Microsoft Office.",
         "KDE.Okular" => "Document viewer for PDF and other formats.",
         "Ollama.Ollama" => "Run and manage local AI language models (LLM) on your PC.",
         "ONLYOFFICE.DesktopEditors" => "Office suite for documents, spreadsheets, and presentations.",
@@ -320,6 +325,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "Picsart.Picsart" => "Photo and graphic editor with AI features.",
         "Pinterest.Pinterest" => "Social app for discovering visual inspiration.",
         "RedHat.Podman-Desktop" => "Graphical UI for managing Podman containers.",
+        "NoWinget.PolarisOffice" => "AI-powered office suite for editing documents, spreadsheets, and presentations, compatible with Microsoft Office.",
         "Daum.PotPlayer" => "Feature-rich multimedia player.",
         "Amazon.PrimeVideo" => "Amazon Prime Video streaming app.",
         "ProtonTechnologies.ProtonVPN" => "VPN app for online privacy protection.",
@@ -339,6 +345,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "OpenWhisperSystems.Signal" => "Encrypted messaging and calling app.",
         "Smarty.Uninstaller" => "Program uninstaller tool.",
         "Snap.Snapchat" => "Social app for sharing photos and videos.",
+        "SoftMaker.Office.NX" => "Commercial office suite (word processor, spreadsheets, presentations) fully compatible with Microsoft Office.",
         "Spotify.Spotify" => "Spotify music streaming app.",
         "Valve.Steam" => "Steam PC gaming distribution platform.",
         "Streamlabs.StreamlabsDesktop" => "Live streaming software with overlays for content creators.",
@@ -365,6 +372,7 @@ fn program_info(winget_id: &str, lang_is_pl: bool) -> &'static str {
         "WireGuard.WireGuard" => "Simple, fast, and modern VPN using state-of-the-art cryptography.",
         "WiseCleaner.WiseCare365" => "PC cleaning, optimization, and speed-up tool (Wise Cleaner).",
         "NoWinget.Wix" => "Wix online website builder.",
+        "Kingsoft.WPSOffice" => "Free office suite fully compatible with Microsoft Office (word processor, spreadsheets, presentations, PDF).",
         "XnSoft.XnViewMP" => "Image viewer and converter supporting many formats.",
         "ZenBrowser.Zen" => "Web browser focused on aesthetics and productivity.",
         "Zoom.Zoom" => "Video conferencing and online meeting software.",
@@ -552,6 +560,7 @@ fn program_category(winget_id: &str) -> &'static str {
         "Nvidia.GeForceNow" => "gaming",
         "OBSProject.OBSStudio" => "video",
         "OCBASE.OCCT" => "system",
+        "NoWinget.OfficeSuite" => "office",
         "KDE.Okular" => "office",
         "Ollama.Ollama" => "ai",
         "ONLYOFFICE.DesktopEditors" => "office",
@@ -564,6 +573,7 @@ fn program_category(winget_id: &str) -> &'static str {
         "Picsart.Picsart" => "graphics",
         "Pinterest.Pinterest" => "social",
         "RedHat.Podman-Desktop" => "development",
+        "NoWinget.PolarisOffice" => "office",
         "Daum.PotPlayer" => "video",
         "Amazon.PrimeVideo" => "streaming",
         "ProtonTechnologies.ProtonVPN" => "network",
@@ -583,6 +593,7 @@ fn program_category(winget_id: &str) -> &'static str {
         "OpenWhisperSystems.Signal" => "communicators",
         "Smarty.Uninstaller" => "utilities",
         "Snap.Snapchat" => "social",
+        "SoftMaker.Office.NX" => "office",
         "Spotify.Spotify" => "music",
         "Valve.Steam" => "gaming",
         "Streamlabs.StreamlabsDesktop" => "video",
@@ -609,6 +620,7 @@ fn program_category(winget_id: &str) -> &'static str {
         "WireGuard.WireGuard" => "network",
         "WiseCleaner.WiseCare365" => "system",
         "NoWinget.Wix" => "utilities",
+        "Kingsoft.WPSOffice" => "office",
         "XnSoft.XnViewMP" => "graphics",
         "ZenBrowser.Zen" => "browsers",
         "Zoom.Zoom" => "communicators",
@@ -815,6 +827,7 @@ impl Default for WinUltimateToolkit {
                 ("Notepad++.Notepad++", "Notepad++", false),
                 ("OBSProject.OBSStudio", "OBS Studio", false),
                 ("OCBASE.OCCT", "OCCT", false),
+                ("NoWinget.OfficeSuite", "OfficeSuite", false),
                 ("KDE.Okular", "Okular", false),
                 ("Ollama.Ollama", "Ollama", false),
                 ("ONLYOFFICE.DesktopEditors", "ONLYOFFICE", false),
@@ -832,6 +845,7 @@ impl Default for WinUltimateToolkit {
                 ("Pinterest.Pinterest", "Pinterest", false),
                 ("Playnite.Playnite", "Playnite", false),
                 ("RedHat.Podman-Desktop", "Podman Desktop", false),
+                ("NoWinget.PolarisOffice", "Polaris Office", false),
                 ("Daum.PotPlayer", "PotPlayer", false),
                 ("Amazon.PrimeVideo", "Prime Video", false),
                 ("ProtonTechnologies.ProtonVPN", "Proton VPN", false),
@@ -859,6 +873,7 @@ impl Default for WinUltimateToolkit {
                 ("Smarty.Uninstaller", "Smarty Uninstaller", false),
                 ("Snap.Snapchat", "Snapchat", false),
                 ("NoWinget.SnappyDriverInstaller", "Snappy Driver Installer", false),
+                ("SoftMaker.Office.NX", "SoftMaker Office", false),
                 ("Spotify.Spotify", "Spotify", false),
                 ("KRTirtho.Spotube", "Spotube", false),
                 ("Valve.Steam", "Steam", false),
@@ -888,6 +903,7 @@ impl Default for WinUltimateToolkit {
                 ("WireGuard.WireGuard", "WireGuard", false),
                 ("WiseCleaner.WiseCare365", "Wise Cleaner", false),
                 ("NoWinget.Wix", "Wix", false),
+                ("Kingsoft.WPSOffice", "WPS Office", false),
                 ("XnSoft.XnViewMP", "XnViewMP", false),
                 ("NoWinget.ytDownloader", "ytDownloader", false),
                 ("ZenBrowser.Zen", "Zen Browser", false),
@@ -2135,8 +2151,8 @@ fn known_direct_exe_url(winget_id: &str) -> Option<&'static str> {
         "NoWinget.Automize" => Some("https://www.hiteksoftware.com/mize/install/14x/windows/mize.exe"),
         "NoWinget.Doxillion" => Some("https://www.nchsoftware.com/documentconvert/doxillionsetup.exe"),
         "NoWinget.EaseUSVideoDownloader" => Some("https://down.easeus.com/product/video_downloader"),
-        "NoWinget.iTubeGo" => Some("https://itubego.com/download/?product=itubego.exe"),
-        "NoWinget.StrongRecovery" => Some("https://www.strongrecovery.com/xdownload.php?xfile=StrongRecovery.exe"),
+        "NoWinget.iTubeGo" => Some("https://download.itubego.com/itubego.exe"),
+        "NoWinget.StrongRecovery" => Some("https://www.strongrecovery.com/StrongRecovery.exe"),
         _ => None,
     }
 }
@@ -2146,6 +2162,10 @@ fn known_msstore_id(winget_id: &str) -> Option<&'static str> {
         "NoWinget.Sefirah" => Some("9PJV6D1JPG0H"),
         "NoWinget.Reddit" => Some("9NS3RBQ5HV5F"),
         "Codex.Codex" => Some("9PLM9XGG6VKS"),
+        "NoWinget.PolarisOffice" => Some("XP9K4TGF5NT1SW"),
+        "NoWinget.OfficeSuite" => Some("9MWK7RN11C5Z"),
+        "NoWinget.PDFgear" => Some("XPDLNJ2FWVCXR1"),
+        "NoWinget.Doxillion" => Some("9NZX75X9QK0D"),
         _ => None,
     }
 }
@@ -2185,18 +2205,36 @@ fn download_file(url: &str, dest: &PathBuf) -> bool {
     success && dest.exists()
 }
 
-fn run_downloaded_installer(path: &PathBuf) -> bool {
+fn run_downloaded_installer(path: &PathBuf, silent_args: &[&str]) -> bool {
     let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
+    let path_str = path.display().to_string();
 
     if ext == "msi" {
+        let mut args = vec!["/i", &path_str, "/qn", "/norestart"];
+        args.extend(silent_args);
         Command::new("msiexec")
-        .args(["/i", &path.display().to_string(), "/qn", "/norestart"])
+        .args(args)
         .status()
         .map_or(false, |s| s.success())
     } else {
-        Command::new(path)
-        .status()
+        let mut cmd = Command::new(path);
+        if !silent_args.is_empty() {
+            cmd.args(silent_args);
+        }
+        cmd.status()
         .map_or(false, |s| s.success())
+    }
+}
+
+fn silent_install_args(winget_id: &str) -> Vec<&'static str> {
+    match winget_id {
+        "NoWinget.EaseUSVideoDownloader" => vec!["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART"],
+        "NoWinget.iTubeGo" => vec!["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART"],
+        "NoWinget.StrongRecovery" => vec!["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART"],
+        "NoWinget.AnimatedWallpaperMaker" => vec!["/S"],
+        "NoWinget.Automize" => vec!["/VERYSILENT", "/NORESTART"],
+        "NoWinget.Doxillion" => vec!["/VERYSILENT", "/NORESTART"],
+        _ => vec![],
     }
 }
 
@@ -2230,7 +2268,7 @@ fn try_direct_download_install(winget_id: &str, pkg_name: &str, lang_is_pl: bool
         format!("Installing: {}", pkg_name)
     });
 
-    let success = run_downloaded_installer(&dest);
+    let success = run_downloaded_installer(&dest, &silent_install_args(winget_id));
     let _ = fs::remove_file(&dest);
     success
 }
@@ -2376,6 +2414,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "Nvidia.GeForceNow" => "https://www.nvidia.com/en-us/geforce-now/download/".to_string(),
         "OBSProject.OBSStudio" => "https://obsproject.com/download".to_string(),
         "OCBASE.OCCT" => "https://www.ocbase.com/download".to_string(),
+        "NoWinget.OfficeSuite" => "https://apps.microsoft.com/detail/9mwk7rn11c5z".to_string(),
         "KDE.Okular" => "https://okular.kde.org/download/".to_string(),
         "Ollama.Ollama" => "https://ollama.com/download".to_string(),
         "ONLYOFFICE.DesktopEditors" => "https://www.onlyoffice.com/desktop.aspx".to_string(),
@@ -2387,6 +2426,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "Picsart.Picsart" => "https://apps.microsoft.com/detail/9nblggh1j2l0".to_string(),
         "Pinterest.Pinterest" => "https://apps.microsoft.com/detail/9wzdncrfj3z6".to_string(),
         "RedHat.Podman-Desktop" => "https://podman-desktop.io/downloads".to_string(),
+        "NoWinget.PolarisOffice" => "https://apps.microsoft.com/detail/xp9k4tgf5nt1sw".to_string(),
         "Daum.PotPlayer" => "https://potplayer.daum.net/".to_string(),
         "Amazon.PrimeVideo" => "https://apps.microsoft.com/detail/9p60xg2mvwvq".to_string(),
         "ProtonTechnologies.ProtonVPN" => "https://protonvpn.com/download".to_string(),
@@ -2405,11 +2445,12 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "OpenWhisperSystems.Signal" => "https://signal.org/download/".to_string(),
         "Smarty.Uninstaller" => "https://www.smartyuninstaller.com/download.html".to_string(),
         "Snap.Snapchat" => "https://apps.microsoft.com/detail/9p8wbgv962k4".to_string(),
+        "SoftMaker.Office.NX" => "https://www.softmaker.com/en/softmaker-office".to_string(),
         "Spotify.Spotify" => "https://www.spotify.com/download/".to_string(),
         "Valve.Steam" => "https://store.steampowered.com/about/".to_string(),
         "Streamlabs.StreamlabsDesktop" => "https://streamlabs.com/".to_string(),
         "SumatraPDF.SumatraPDF" => "https://www.sumatrapdfreader.org/download-free-pdf-viewer".to_string(),
-        "NoWinget.PDFgear" => "https://www.pdfgear.com/download/".to_string(),
+        "NoWinget.PDFgear" => "https://apps.microsoft.com/detail/xpdlnj2fwvcxr1".to_string(),
         "TrackerSoftware.PDF-XChangeEditor" => "https://www.pdf-xchange.com/product/pdf-xchange-editor".to_string(),
         "Telegram.TelegramDesktop" => "https://desktop.telegram.org/".to_string(),
         "Mozilla.Thunderbird" => "https://www.thunderbird.net/".to_string(),
@@ -2429,6 +2470,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "WireGuard.WireGuard" => "https://www.wireguard.com/install/".to_string(),
         "WiseCleaner.WiseCare365" => "https://www.wisecleaner.com/wise-care-365.html".to_string(),
         "NoWinget.Wix" => "https://www.wix.com/".to_string(),
+        "Kingsoft.WPSOffice" => "https://www.wps.com/download/".to_string(),
         "XnSoft.XnViewMP" => "https://www.xnview.com/en/xnviewmp/".to_string(),
         "ZenBrowser.Zen" => "https://zen-browser.app/download".to_string(),
         "Zoom.Zoom" => "https://zoom.us/download".to_string(),
@@ -2441,7 +2483,7 @@ fn install_package(winget_id: &str, pkg_name: &str, lang_is_pl: bool, status: &A
         "NoWinget.Automize" => "https://www.hiteksoftware.com/".to_string(),
         "TechSmith.Camtasia" => "https://www.techsmith.com/download/camtasia/".to_string(),
         "DOSBox.DOSBox" => "https://www.dosbox.com/download.php".to_string(),
-        "NoWinget.Doxillion" => "https://www.nchsoftware.com/documentconvert/index.html".to_string(),
+        "NoWinget.Doxillion" => "https://apps.microsoft.com/detail/9nzx75x9qk0d".to_string(),
         "Dropbox.Dropbox" => "https://www.dropbox.com/download".to_string(),
         "EaseUS.PartitionMaster" => "https://www.easeus.com/partition-manager/epm-free.html".to_string(),
         "EaseUS.TodoBackup" => "https://www.easeus.com/backup-software/tb-free.html".to_string(),
